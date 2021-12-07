@@ -1,8 +1,8 @@
-package utils;
+package com.cyx.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import enums.BizCodeEnum;
+import com.cyx.enums.BizCodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

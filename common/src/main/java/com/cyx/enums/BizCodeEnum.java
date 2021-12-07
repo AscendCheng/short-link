@@ -1,4 +1,4 @@
-package enums;
+package com.cyx.enums;
 
 import lombok.Getter;
 

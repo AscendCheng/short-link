@@ -1,6 +1,6 @@
-package exception;
+package com.cyx.exception;
 
-import enums.BizCodeEnum;
+import com.cyx.enums.BizCodeEnum;
 import lombok.Data;
 
 /**

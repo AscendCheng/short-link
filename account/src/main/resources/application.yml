@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: acount
+  cloud:
+    nacos:
+      discovery:
+        servr-addr: 106.14.157.166:8848
+        username: nacos
+        password: nacos
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.14.157.166:3306/data?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+#配置plus打印sql日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+sms:
+  app-code: 1ab6e5a9091f4614b0c995e4cb71297e
+  app-secret: fehuNmtCmTVt8tYb1ySGsEDg1KOFMU3h
+  template-id: M72CB42894
