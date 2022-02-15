@@ -1,8 +1,8 @@
 server:
-  port: 8081
+  port: 8082
 spring:
   application:
-    name: acount
+    name: link
   cloud:
     nacos:
       discovery:
@@ -74,18 +74,3 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-
-sms:
-  app-code: 1ab6e5a9091f4614b0c995e4cb71297e
-  app-secret: fehuNmtCmTVt8tYb1ySGsEDg1KOFMU3h
-  template-id: M72CB42894
-
-
-#阿里云OSS配置
-aliyun:
-  oss:
-    endpoint: oss-cn-shanghai.aliyuncs.com
-    access-key-id: LTAI5tLgRkH6M37EXGotC2ai
-    access-key-secret: uVnaJx3jk9ysTBnOiVq2Z3Pa9FFXML
-    bucketname: cyx-short-link

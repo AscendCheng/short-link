@@ -2,7 +2,6 @@ package com.cyx.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author cyx
- * @since 2021-12-04
+ * @since 2022-02-15
  */
 @RestController
-@RequestMapping("/api/traffic/v1")
-public class TrafficController {
+@RequestMapping("/shortLinkDO")
+public class ShortLinkController {
 
 }
 

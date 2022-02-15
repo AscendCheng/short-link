@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +28,7 @@ public class SmsComponent {
     @Autowired
     private SmsConfig smsConfig;
 
+    @Async("threadPoolTaskExecutor")
     public void send(String mobile, String templateId, String value) {
         String url = String.format(send_url, mobile, templateId, value);
         HttpHeaders httpHeaders = new HttpHeaders();

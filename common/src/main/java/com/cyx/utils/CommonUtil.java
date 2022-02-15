@@ -1,5 +1,6 @@
 package com.cyx.utils;
 
+import com.google.common.hash.Hashing;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,8 @@ import java.util.*;
  **/
 @Slf4j
 public class CommonUtil {
+    private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     /**
      * 获取ip
      *
@@ -64,17 +67,18 @@ public class CommonUtil {
 
     /**
      * 获取全部请求头
+     *
      * @param request
      * @return
      */
-    public static Map<String, String> getAllRequestHeader(HttpServletRequest request){
+    public static Map<String, String> getAllRequestHeader(HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
         Map<String, String> map = new HashMap<>();
         while (headerNames.hasMoreElements()) {
-            String key = (String)headerNames.nextElement();
+            String key = (String) headerNames.nextElement();
             //根据名称获取请求头的值
             String value = request.getHeader(key);
-            map.put(key,value);
+            map.put(key, value);
         }
 
         return map;
@@ -175,9 +179,34 @@ public class CommonUtil {
             response.flushBuffer();
 
         } catch (IOException e) {
-            log.warn("响应json数据给前端异常:{}",e);
+            log.warn("响应json数据给前端异常:{}", e);
         }
+    }
 
+    /**
+     * 对字符串MurMurHash得到long
+     *
+     * @param param 字符串
+     * @return long
+     */
+    public static long murmurHash32(String param) {
+        long hash = Hashing.murmur3_32().hashUnencodedChars(param).padToLong();
+        return hash;
+    }
 
+    /**
+     * 10进制转64进制
+     *
+     * @param num 数
+     * @return
+     */
+    public static String encodeToBase62(long num) {
+        StringBuffer stringBuffer = new StringBuffer();
+        do {
+            int index = (int) num % 62;
+            stringBuffer.append(CHARS.charAt(index));
+            num = num / 62;
+        } while (num > 0);
+        return stringBuffer.toString();
     }
 }
