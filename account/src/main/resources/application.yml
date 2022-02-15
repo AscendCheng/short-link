@@ -86,6 +86,6 @@ sms:
 aliyun:
   oss:
     endpoint: oss-cn-shanghai.aliyuncs.com
-    access-key-id: LTAI5tLgRkH6M37EXGotC2ai
-    access-key-secret: uVnaJx3jk9ysTBnOiVq2Z3Pa9FFXML
+    access-key-id:
+    access-key-secret:
     bucketname: cyx-short-link
