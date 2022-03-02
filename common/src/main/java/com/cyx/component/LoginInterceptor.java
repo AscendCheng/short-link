@@ -35,6 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Claims claims = JwtUtil.checkJwt(token);
         if (claims == null) {
             CommonUtil.sendJsonMessage(response, JsonData.buildResult(BizCodeEnum.ACCOUNT_UNLOGIN));
+            return false;
         }
         Long accountNo = Long.parseLong(claims.get("account_no").toString());
         String headImg = claims.get("head_img").toString();
