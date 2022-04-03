@@ -2,7 +2,7 @@ package com.cyx.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cyx.model.LinkGroupDO;
-import com.cyx.model.LinkGroupRequest;
+import com.cyx.model.request.LinkGroupRequest;
 import com.cyx.model.LinkGroupVO;
 
 import java.util.List;

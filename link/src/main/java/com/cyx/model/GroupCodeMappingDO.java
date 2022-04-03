@@ -15,12 +15,12 @@ import java.util.Date;
  * </p>
  *
  * @author cyx
- * @since 2022-02-15
+ * @since 2022-03-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("short_link")
-public class ShortLinkDO implements Serializable {
+@TableName("group_code_mapping_0")
+public class GroupCodeMappingDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -91,4 +91,6 @@ public class ShortLinkDO implements Serializable {
      * 链接产品层级：FIRST 免费青铜、SECOND黄金、THIRD钻石
      */
     private String linkType;
+
+
 }

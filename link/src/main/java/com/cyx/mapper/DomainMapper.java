@@ -1,7 +1,7 @@
 package com.cyx.mapper;
 
+import com.cyx.model.DomainDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cyx.model.ShortLinkDO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
  * </p>
  *
  * @author cyx
- * @since 2022-02-15
+ * @since 2022-03-19
  */
 @Repository
-public interface ShortLinkMapper extends BaseMapper<ShortLinkDO> {
+public interface DomainMapper extends BaseMapper<DomainDO> {
 
 }

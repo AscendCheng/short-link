@@ -10,6 +10,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/api/group/*/**");
+                .addPathPatterns("/api/group/*/**","/api/link/*/**");
     }
 }

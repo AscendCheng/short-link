@@ -79,6 +79,7 @@ spring:
         short_link:
           database-strategy:
             standard:
+              sharding-column: code
               precise-algorithm-class-name: com.cyx.strategy.CustomDBPreciseShardingAlgorithm
           actual-data-nodes: ds0.short_link,ds1.short_link,ds2.short_link,
           table-strategy:
@@ -93,6 +94,16 @@ spring:
                 id: ${workerId}
             #id生成策略
             type: SNOWFLAKE
+      default-data-source-name: ds0
+  rabbitmq:
+    host: 106.14.157.166
+    port: 5672
+    virtual-host: dev
+    username: admin
+    password: password
+    listener:
+      simple:
+        acknowledge-mode: auto
 
 
 #配置plus打印sql日志

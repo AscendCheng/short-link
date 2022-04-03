@@ -1,4 +1,4 @@
-package com.cyx.model;
+package com.cyx.model.request;
 
 import lombok.Data;
 

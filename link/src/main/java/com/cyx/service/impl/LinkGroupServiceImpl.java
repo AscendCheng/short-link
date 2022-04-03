@@ -5,7 +5,7 @@ import com.cyx.component.LoginInterceptor;
 import com.cyx.manager.LinkGroupManager;
 import com.cyx.mapper.LinkGroupMapper;
 import com.cyx.model.LinkGroupDO;
-import com.cyx.model.LinkGroupRequest;
+import com.cyx.model.request.LinkGroupRequest;
 import com.cyx.model.LinkGroupVO;
 import com.cyx.model.LoginUser;
 import com.cyx.service.LinkGroupService;

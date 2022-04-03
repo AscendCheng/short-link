@@ -54,7 +54,7 @@ public class MyBatisPlusGenerator {
         dsConfig.setDbType(DbType.MYSQL)
                 .setDriverName("com.mysql.cj.jdbc.Driver")
                 //TODO  TODO  TODO  TODO
-                .setUrl("jdbc:mysql://106.14.157.166:3306/data?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
+                .setUrl("jdbc:mysql://106.14.157.166:3306/data_a?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
                 .setUsername("root")
                 .setPassword("123456");
 
@@ -74,11 +74,11 @@ public class MyBatisPlusGenerator {
 
                 // 生成的表, 支持多表一起生成，以数组形式填写
                 //TODO  TODO  TODO  TODO
-                .setInclude("link_group");
+                .setInclude("group_code_mapping_0","domain");
 
         //4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("net.cyx")
+        pkConfig.setParent("com.cyx")
                 .setMapper("mapper")
                 .setService("service")
                 .setController("controller")

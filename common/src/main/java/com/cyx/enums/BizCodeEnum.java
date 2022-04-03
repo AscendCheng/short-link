@@ -88,9 +88,14 @@ public enum BizCodeEnum {
     FILE_UPLOAD_USER_IMG_FAIL(700101, "用户头像文件上传失败"),
 
     /**
-     * 文件相关
+     * 数据库相关
      */
-    DB_ROUTE_NOT_FOUND(800101, "数据库找不到");
+    DB_ROUTE_NOT_FOUND(800101, "数据库找不到"),
+
+    /**
+     * MQ相关
+     */
+    MQ_CONSUMER_EXCEPTION(900101, "数据库找不到");
 
     @Getter
     private String message;

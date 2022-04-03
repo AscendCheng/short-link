@@ -2,7 +2,7 @@ package com.cyx.controller;
 
 import com.cyx.enums.BizCodeEnum;
 import com.cyx.model.LinkGroupVO;
-import com.cyx.model.LinkGroupRequest;
+import com.cyx.model.request.LinkGroupRequest;
 import com.cyx.service.LinkGroupService;
 import com.cyx.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;

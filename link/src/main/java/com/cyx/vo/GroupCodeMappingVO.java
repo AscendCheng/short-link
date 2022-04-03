@@ -1,30 +1,18 @@
-package com.cyx.model;
+package com.cyx.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
+ * GroupCodeMappingVO.
  *
- * </p>
- *
- * @author cyx
- * @since 2022-02-15
+ * @author ChengYuXin N0041237
+ * @version 1.0.0
+ * @date 2022/3/19
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@TableName("short_link")
-public class ShortLinkDO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
+public class GroupCodeMappingVO {
     private Long id;
 
     /**
