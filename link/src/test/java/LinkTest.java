@@ -24,8 +24,17 @@ public class LinkTest {
     @Test
     @Async
     public void murMurHashTest() {
+        String geneId = CommonUtil.generateUUID();
         for (int i = 0; i < 5; i++) {
-            String originalUrl = "https://cherrycola.cn"+ CommonUtil.generateUUID() + CommonUtil.getStringNumRandom(6);
+            String originalUrl = "https://cherrycola.cn"+ geneId + CommonUtil.getStringNumRandom(6);
+            System.out.println(shortLinkComponent.createShortLink(originalUrl));
+        }
+    }
+
+    @Test
+    public void shortLinkCodeTest() {
+        String originalUrl = "https://cherrycola.cn";
+        for (int i = 0; i < 5; i++) {
             System.out.println(shortLinkComponent.createShortLink(originalUrl));
         }
     }

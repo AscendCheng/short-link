@@ -2,6 +2,7 @@ package com.cyx.controller;
 
 
 import com.cyx.model.request.ShortLinkAddRequest;
+import com.cyx.model.request.ShortLinkPageRequest;
 import com.cyx.service.ShortLinkService;
 import com.cyx.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author cyx
@@ -26,8 +27,18 @@ public class ShortLinkController {
     private ShortLinkService shortLinkService;
 
     @PostMapping("/create")
-    public JsonData createShortLink(@RequestBody ShortLinkAddRequest request){
+    public JsonData createShortLink(@RequestBody ShortLinkAddRequest request) {
         return shortLinkService.createShortLink(request);
+    }
+
+    /**
+     * 分页查找短链
+     *
+     * @return
+     */
+    @RequestMapping("page")
+    public JsonData pageShortLinkByGroupId(@RequestBody ShortLinkPageRequest request) {
+        return JsonData.buildSuccess(shortLinkService.pageShortLinkByGroupId(request));
     }
 }
 

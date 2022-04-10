@@ -22,7 +22,7 @@ public class ShardingTableConfig {
     //配置启用那些表的后缀
     static {
         tableSuffixList.add("0");
-        tableSuffixList.add("a");
+        tableSuffixList.add("1");
     }
 
 
@@ -31,8 +31,9 @@ public class ShardingTableConfig {
      *
      * @return
      */
-    public static String getRandomTableSuffix() {
-        int index = random.nextInt(tableSuffixList.size());
+    public static String getRandomTableSuffix(String code) {
+        int hash = code.hashCode();
+        int index = Math.abs(hash) % tableSuffixList.size();
         return tableSuffixList.get(index);
     }
 }

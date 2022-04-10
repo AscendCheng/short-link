@@ -203,10 +203,46 @@ public class CommonUtil {
     public static String encodeToBase62(long num) {
         StringBuffer stringBuffer = new StringBuffer();
         do {
-            int index = (int) num % 62;
+            int index = (int) (num % 62);
             stringBuffer.append(CHARS.charAt(index));
             num = num / 62;
         } while (num > 0);
         return stringBuffer.toString();
+    }
+
+    /**
+     * 添加url前缀
+     *
+     * @param url url
+     * @return String
+     */
+    public static String addUrlPrefix(String url) {
+        return IdUtil.geneSnowFlakeID() + "&" + url;
+    }
+
+    /**
+     * 移除url前缀
+     *
+     * @param url url
+     * @return String
+     */
+    public static String removeUrlPrefix(String url) {
+        return url.substring(url.indexOf("&") + 1);
+    }
+
+    /**
+     * 如果短链码重复，则调用此方法，拼接的前缀随机id加1
+     *
+     * @param url 冲突的url
+     * @return String
+     */
+    public static String addUrlPrefixVersion(String url) {
+        String version = url.substring(0, url.indexOf("&"));
+
+        // 原始地址
+        String originalUrl = removeUrlPrefix(url);
+
+        Long newVersion = Long.parseLong(version) + 1L;
+        return newVersion + "&" + originalUrl;
     }
 }

@@ -11,10 +11,9 @@ import com.cyx.model.PageVo;
 import com.cyx.vo.GroupCodeMappingVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +23,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @date 2022/3/19
  */
+@Service
 public class GroupCodeMappingManagerImpl implements GroupCodeMappingManager {
     @Autowired
     private GroupCodeMappingMapper groupCodeMappingMapper;
@@ -55,9 +55,8 @@ public class GroupCodeMappingManagerImpl implements GroupCodeMappingManager {
         Page<GroupCodeMappingDO> pageInfo = new Page<>(page, size);
         Page<GroupCodeMappingDO> pageResult = groupCodeMappingMapper.selectPage(pageInfo, new QueryWrapper<GroupCodeMappingDO>()
                 .eq("account_no", accountNo)
-                .eq("group_id", groupId));
-        Map<String, Object> pageMap = new HashMap<>(3 * 2);
-
+                .eq("group_id", groupId)
+                .eq("del",0));
         List<GroupCodeMappingVO> voList = pageResult.getRecords().stream().map(recordDo -> processGroupCodeMappingDO(recordDo)).collect(Collectors.toList());
         return new PageVo(voList, pageResult.getCurrent(), pageResult.getTotal());
     }
@@ -70,6 +69,16 @@ public class GroupCodeMappingManagerImpl implements GroupCodeMappingManager {
                         .eq("account_no", accountNo)
                         .eq("group_id", groupId).set("state", shortLinkStateEnum.name()));
         return rows;
+    }
+
+    @Override
+    public GroupCodeMappingDO findByCodeAndMappingId(String shortLinkCode, Long groupId, Long accountNo) {
+        GroupCodeMappingDO groupCodeMappingDO = groupCodeMappingMapper.selectOne(new QueryWrapper<GroupCodeMappingDO>()
+                .eq("code", shortLinkCode)
+                .eq("account_no", accountNo)
+                .eq("group_id", groupId)
+                .eq("del",0));
+        return groupCodeMappingDO;
     }
 
     private GroupCodeMappingVO processGroupCodeMappingDO(GroupCodeMappingDO groupCodeMappingDO) {

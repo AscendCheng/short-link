@@ -5,9 +5,9 @@ import com.cyx.component.LoginInterceptor;
 import com.cyx.manager.LinkGroupManager;
 import com.cyx.mapper.LinkGroupMapper;
 import com.cyx.model.LinkGroupDO;
-import com.cyx.model.request.LinkGroupRequest;
 import com.cyx.model.LinkGroupVO;
 import com.cyx.model.LoginUser;
+import com.cyx.model.request.LinkGroupRequest;
 import com.cyx.service.LinkGroupService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,6 @@ public class LinkGroupServiceImpl extends ServiceImpl<LinkGroupMapper, LinkGroup
         LinkGroupDO linkGroupDO = new LinkGroupDO();
         linkGroupDO.setAccountNo(accountNo);
         linkGroupDO.setTitle(addRequest.getTitle());
-
         return linkGroupManager.add(linkGroupDO);
     }
 

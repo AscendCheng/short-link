@@ -1,10 +1,11 @@
 package com.cyx.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,11 +21,14 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("group_code_mapping_0")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class GroupCodeMappingDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    //@TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
