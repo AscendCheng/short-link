@@ -49,4 +49,20 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
      * @return
      */
     PageVo pageShortLinkByGroupId(ShortLinkPageRequest request);
+
+    /**
+     * 删除短链.
+     *
+     * @param request 请求参数.
+     * @return JsonData
+     */
+    JsonData deleteShortLink(ShortLinkAddRequest request);
+
+    /**
+     * 更新短链.
+     *
+     * @param request 请求参数.
+     * @return JsonData
+     */
+    JsonData updateShortLink(ShortLinkAddRequest request);
 }

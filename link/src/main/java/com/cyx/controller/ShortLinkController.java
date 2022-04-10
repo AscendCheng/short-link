@@ -40,5 +40,15 @@ public class ShortLinkController {
     public JsonData pageShortLinkByGroupId(@RequestBody ShortLinkPageRequest request) {
         return JsonData.buildSuccess(shortLinkService.pageShortLinkByGroupId(request));
     }
+
+    @PostMapping("/delete")
+    public JsonData deleteShortLink(@RequestBody ShortLinkAddRequest request) {
+        return shortLinkService.deleteShortLink(request);
+    }
+
+    @PostMapping("/update")
+    public JsonData updateShortLink(@RequestBody ShortLinkAddRequest request) {
+        return shortLinkService.updateShortLink(request);
+    }
 }
 

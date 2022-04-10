@@ -205,6 +205,36 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
         return pageVo;
     }
 
+    @Override
+    public JsonData deleteShortLink(ShortLinkAddRequest request) {
+        EventMessage eventMsg = EventMessage.builder().account(LoginInterceptor.threadLocal.get().getAccountNo())
+                .content(JsonUtil.obj2Json(request))
+                .messageId(IdUtil.geneSnowFlakeID().toString())
+                .eventMessageType(EventMessageTypeEnum.SHORT_LINK_DEL.name())
+                .build();
+        rabbitTemplate.convertAndSend(rabbitMqConfig.getShortLinkEventExchange(),
+                rabbitMqConfig.getShortLinkAddRoutingKey(),
+                eventMsg);
+        // 如果请求不为空
+
+        return JsonData.buildSuccess();
+    }
+
+    @Override
+    public JsonData updateShortLink(ShortLinkAddRequest request) {
+        EventMessage eventMsg = EventMessage.builder().account(LoginInterceptor.threadLocal.get().getAccountNo())
+                .content(JsonUtil.obj2Json(request))
+                .messageId(IdUtil.geneSnowFlakeID().toString())
+                .eventMessageType(EventMessageTypeEnum.SHORT_LINK_UPDATE.name())
+                .build();
+        rabbitTemplate.convertAndSend(rabbitMqConfig.getShortLinkEventExchange(),
+                rabbitMqConfig.getShortLinkAddRoutingKey(),
+                eventMsg);
+        // 如果请求不为空
+
+        return JsonData.buildSuccess();
+    }
+
     /**
      * 校验域名.
      *

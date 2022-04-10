@@ -21,5 +21,35 @@ public enum EventMessageTypeEnum {
     /**
      * B端.
      */
-    SHORT_LINK_ADD_MAPPING;
+    SHORT_LINK_ADD_MAPPING,
+
+    /**
+     * 删除短链.
+     */
+    SHORT_LINK_DEL,
+
+    /**
+     * C端.
+     */
+    SHORT_LINK_DEL_LINK,
+
+    /**
+     * B端.
+     */
+    SHORT_LINK_DEL_MAPPING,
+
+    /**
+     * 更新短链.
+     */
+    SHORT_LINK_UPDATE,
+
+    /**
+     * C端.
+     */
+    SHORT_LINK_UPDATE_LINK,
+
+    /**
+     * B端.
+     */
+    SHORT_LINK_UPDATE_MAPPING;
 }
