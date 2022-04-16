@@ -3,6 +3,7 @@ package com.cyx.controller;
 
 import com.cyx.model.request.ShortLinkAddRequest;
 import com.cyx.model.request.ShortLinkPageRequest;
+import com.cyx.model.request.ShortLinkUpdateRequest;
 import com.cyx.service.ShortLinkService;
 import com.cyx.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class ShortLinkController {
     }
 
     @PostMapping("/update")
-    public JsonData updateShortLink(@RequestBody ShortLinkAddRequest request) {
+    public JsonData updateShortLink(@RequestBody ShortLinkUpdateRequest request) {
         return shortLinkService.updateShortLink(request);
     }
 }

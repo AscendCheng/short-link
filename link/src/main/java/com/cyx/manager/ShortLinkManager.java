@@ -29,9 +29,16 @@ public interface ShortLinkManager {
     /**
      * 删除.
      *
-     * @param shortLinkCode 短链码
-     * @param accountNo     账号
+     * @param shortLinkDO 参数
      * @return
      */
-    int del(String shortLinkCode, Long accountNo);
+    int del(ShortLinkDO shortLinkDO);
+
+    /**
+     * 更新.
+     *
+     * @param shortLinkDo 参数
+     * @return
+     */
+    int update(ShortLinkDO shortLinkDo);
 }

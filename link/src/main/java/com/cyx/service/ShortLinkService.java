@@ -6,6 +6,7 @@ import com.cyx.model.PageVo;
 import com.cyx.model.ShortLinkDO;
 import com.cyx.model.request.ShortLinkAddRequest;
 import com.cyx.model.request.ShortLinkPageRequest;
+import com.cyx.model.request.ShortLinkUpdateRequest;
 import com.cyx.utils.JsonData;
 import com.cyx.vo.ShortLinkVO;
 
@@ -64,5 +65,22 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
      * @param request 请求参数.
      * @return JsonData
      */
-    JsonData updateShortLink(ShortLinkAddRequest request);
+    JsonData updateShortLink(ShortLinkUpdateRequest request);
+
+
+    /**
+     * 处理短链更新逻辑.
+     *
+     * @param eventMessage 消息
+     * @return boolean
+     */
+    boolean handleUpdateShortLink(EventMessage eventMessage);
+
+    /**
+     * 处理短链删除逻辑.
+     *
+     * @param eventMessage 消息
+     * @return boolean
+     */
+    boolean handleDeleteShortLink(EventMessage eventMessage);
 }

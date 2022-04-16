@@ -1,6 +1,7 @@
 package com.cyx.manager.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cyx.manager.ShortLinkManager;
 import com.cyx.mapper.ShortLinkMapper;
 import com.cyx.model.ShortLinkDO;
@@ -30,10 +31,22 @@ public class ShortLinkManagerImpl implements ShortLinkManager {
     }
 
     @Override
-    public int del(String shortLinkCode, Long accountNo) {
-        ShortLinkDO shortLinkDO = new ShortLinkDO();
-        shortLinkDO.setDel(1);
+    public int del(ShortLinkDO shortLinkDO) {
         return shortLinkMapper.update(shortLinkDO,
-                new QueryWrapper<ShortLinkDO>().eq("code", shortLinkCode).eq("accout_no", accountNo));
+                new UpdateWrapper<ShortLinkDO>().eq("code", shortLinkDO.getCode())
+                        .eq("account_no", shortLinkDO.getAccountNo())
+                        .set("del", 1));
+    }
+
+    @Override
+    public int update(ShortLinkDO shortLinkDo) {
+        int rows = shortLinkMapper.update(null,new UpdateWrapper<ShortLinkDO>()
+                .eq("code",shortLinkDo.getCode())
+                .eq("del",0)
+                .eq("account_no", shortLinkDo.getAccountNo())
+                .set("title",shortLinkDo.getTitle())
+                .set("domain",shortLinkDo.getDomain())
+        );
+        return rows;
     }
 }

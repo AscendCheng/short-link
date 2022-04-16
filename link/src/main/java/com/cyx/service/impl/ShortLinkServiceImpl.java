@@ -19,7 +19,9 @@ import com.cyx.model.LinkGroupDO;
 import com.cyx.model.PageVo;
 import com.cyx.model.ShortLinkDO;
 import com.cyx.model.request.ShortLinkAddRequest;
+import com.cyx.model.request.ShortLinkDelRequest;
 import com.cyx.model.request.ShortLinkPageRequest;
+import com.cyx.model.request.ShortLinkUpdateRequest;
 import com.cyx.service.ShortLinkService;
 import com.cyx.utils.CommonUtil;
 import com.cyx.utils.IdUtil;
@@ -213,22 +215,85 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
                 .eventMessageType(EventMessageTypeEnum.SHORT_LINK_DEL.name())
                 .build();
         rabbitTemplate.convertAndSend(rabbitMqConfig.getShortLinkEventExchange(),
-                rabbitMqConfig.getShortLinkAddRoutingKey(),
+                rabbitMqConfig.getShortLinkDeleteRoutingKey(),
                 eventMsg);
         // 如果请求不为空
 
         return JsonData.buildSuccess();
     }
 
+    /**
+     * 处理短链新增逻辑.
+     *
+     * @param eventMessage 消息
+     * @return boolean
+     */
     @Override
-    public JsonData updateShortLink(ShortLinkAddRequest request) {
+    public boolean handleUpdateShortLink(EventMessage eventMessage) {
+        Long accountNo = eventMessage.getAccount();
+        String eventMessageType = eventMessage.getEventMessageType();
+        ShortLinkUpdateRequest shortLinkUpdateRequest = JsonUtil.json2Obj(eventMessage.getContent(), ShortLinkUpdateRequest.class);
+        // 短链域名校验
+        DomainDO domainDO = this.checkDomain(shortLinkUpdateRequest.getDomainType(), shortLinkUpdateRequest.getDomainId(), accountNo);
+
+        int rows = 0;
+        if (EventMessageTypeEnum.SHORT_LINK_UPDATE_LINK.name().equalsIgnoreCase(eventMessageType)) {
+            // 判断是否已存在
+            ShortLinkDO shortLinkDO = ShortLinkDO.builder()
+                    .code(shortLinkUpdateRequest.getCode())
+                    .title(shortLinkUpdateRequest.getTitle())
+                    .domain(domainDO.getValue())
+                    .build();
+            rows = shortLinkManager.update(shortLinkDO);
+            log.info("更新C端,rows:{}", rows);
+        } else if (EventMessageTypeEnum.SHORT_LINK_ADD_MAPPING.name().equalsIgnoreCase(eventMessageType)) {
+            GroupCodeMappingDO groupCodeMappingDO = GroupCodeMappingDO.builder()
+                    .id(shortLinkUpdateRequest.getMappingId())
+                    .groupId(shortLinkUpdateRequest.getGroupId())
+                    .accountNo(accountNo)
+                    .domain(domainDO.getValue())
+                    .build();
+            rows = groupCodeMappingManager.update(groupCodeMappingDO);
+            log.info("更新B端,rows:{}", rows);
+        }
+        return rows > 0;
+    }
+
+    @Override
+    public boolean handleDeleteShortLink(EventMessage eventMessage) {
+        Long accountNo = eventMessage.getAccount();
+        String eventMessageType = eventMessage.getEventMessageType();
+        ShortLinkDelRequest shortLinkDelRequest = JsonUtil.json2Obj(eventMessage.getContent(), ShortLinkDelRequest.class);
+        int rows = 0;
+        if (EventMessageTypeEnum.SHORT_LINK_DEL_LINK.name().equalsIgnoreCase(eventMessageType)) {
+            // 判断是否已存在
+            ShortLinkDO shortLinkDO = ShortLinkDO.builder()
+                    .code(shortLinkDelRequest.getCode())
+                    .accountNo(accountNo)
+                    .build();
+            rows = shortLinkManager.del(shortLinkDO);
+            log.info("删除C端,rows:{}", rows);
+        } else if (EventMessageTypeEnum.SHORT_LINK_DEL_MAPPING.name().equalsIgnoreCase(eventMessageType)) {
+            GroupCodeMappingDO groupCodeMappingDO = GroupCodeMappingDO.builder()
+                    .id(shortLinkDelRequest.getMappingId())
+                    .groupId(shortLinkDelRequest.getGroupId())
+                    .accountNo(accountNo)
+                    .build();
+            rows = groupCodeMappingManager.delete(groupCodeMappingDO);
+            log.info("删除B端,rows:{}", rows);
+        }
+        return false;
+    }
+
+    @Override
+    public JsonData updateShortLink(ShortLinkUpdateRequest request) {
         EventMessage eventMsg = EventMessage.builder().account(LoginInterceptor.threadLocal.get().getAccountNo())
                 .content(JsonUtil.obj2Json(request))
                 .messageId(IdUtil.geneSnowFlakeID().toString())
                 .eventMessageType(EventMessageTypeEnum.SHORT_LINK_UPDATE.name())
                 .build();
         rabbitTemplate.convertAndSend(rabbitMqConfig.getShortLinkEventExchange(),
-                rabbitMqConfig.getShortLinkAddRoutingKey(),
+                rabbitMqConfig.getShortLinkUpdateRoutingKey(),
                 eventMsg);
         // 如果请求不为空
 
