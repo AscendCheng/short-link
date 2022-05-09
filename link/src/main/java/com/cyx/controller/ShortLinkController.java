@@ -37,7 +37,7 @@ public class ShortLinkController {
      *
      * @return
      */
-    @RequestMapping("page")
+    @RequestMapping("/page")
     public JsonData pageShortLinkByGroupId(@RequestBody ShortLinkPageRequest request) {
         return JsonData.buildSuccess(shortLinkService.pageShortLinkByGroupId(request));
     }

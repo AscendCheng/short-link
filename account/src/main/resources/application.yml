@@ -14,7 +14,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://106.14.157.166:3306/data?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: ENC(QgMFhSYEGAS7e3pa08jAhhjivCA1iG5d)
 
   redis:
     client-type: jedis
@@ -43,7 +43,7 @@ spring:
         maxLifetimeMilliseconds: 1800000
         maxPoolSize: 50
         minPoolSize: 50
-        password: 123456
+        password: ENC(QgMFhSYEGAS7e3pa08jAhhjivCA1iG5d)
         type: com.zaxxer.hikari.HikariDataSource
         username: root
     props:
