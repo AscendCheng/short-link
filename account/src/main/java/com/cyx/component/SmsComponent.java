@@ -2,12 +2,7 @@ package com.cyx.component;
 
 import com.cyx.config.SmsConfig;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -31,14 +26,16 @@ public class SmsComponent {
     @Async("threadPoolTaskExecutor")
     public void send(String mobile, String templateId, String value) {
         String url = String.format(send_url, mobile, templateId, value);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", "APPCODE " + smsConfig.getAppCode());
-        HttpEntity entity = new HttpEntity(httpHeaders);
-        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            log.info("【发送短信】成功,url:{},body:{}", url, responseEntity.getBody());
-        } else {
-            log.error("【发送短信】失败,url:{},body:{}", url, responseEntity.getBody());
-        }
+        log.info("【发送短信】成功,url:{},code:{}", url, value);
+
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.set("Authorization", "APPCODE " + smsConfig.getAppCode());
+//        HttpEntity entity = new HttpEntity(httpHeaders);
+//        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+//        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+//            log.info("【发送短信】成功,url:{},body:{}", url, responseEntity.getBody());
+//        } else {
+//            log.error("【发送短信】失败,url:{},body:{}", url, responseEntity.getBody());
+//        }
     }
 }

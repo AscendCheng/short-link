@@ -184,6 +184,23 @@ public class CommonUtil {
     }
 
     /**
+     * 响应html数据给前端
+     *
+     * @param response
+     * @param obj
+     */
+    public static void sendHtmlMessage(HttpServletResponse response, JsonData jsonData) {
+
+        response.setContentType("application/json; charset=utf-8");
+        try (PrintWriter writer = response.getWriter()) {
+            writer.print(jsonData.getData());
+            response.flushBuffer();
+        } catch (IOException e) {
+            log.warn("响应html数据给前端异常:{}", e);
+        }
+    }
+
+    /**
      * 对字符串MurMurHash得到long
      *
      * @param param 字符串

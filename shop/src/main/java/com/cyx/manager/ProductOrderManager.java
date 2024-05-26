@@ -26,7 +26,7 @@ public interface ProductOrderManager {
      * @param accountNo  账号
      * @return
      */
-    ProductOrderDO findByOutTradeNoAndAccountNo(String outTradeNo, String accountNo);
+    ProductOrderDO findByOutTradeNoAndAccountNo(String outTradeNo, Long accountNo);
 
     /**
      * 更新订单.
@@ -37,7 +37,7 @@ public interface ProductOrderManager {
      * @param newPayState 新支付状态
      * @return
      */
-    int updateOrderPayState(String outTradeNo, String accountNo, String oldPayState, String newPayState);
+    int updateOrderPayState(String outTradeNo, Long accountNo, String oldPayState, String newPayState);
 
-    PageVo page(int pageNum, int pageSize, String accountNo, String payState);
+    PageVo page(int pageNum, int pageSize, Long accountNo, String payState);
 }
