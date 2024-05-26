@@ -29,7 +29,7 @@ public class ThreadPoolTaskConfig {
         threadPoolTaskExecutor.setMaxPoolSize(8);
 
         //缓存队列（阻塞队列）当核心线程数达到最大时，新任务会放在队列中排队等待执行
-        threadPoolTaskExecutor.setQueueCapacity(124);
+        threadPoolTaskExecutor.setQueueCapacity(1024);
 
         //当线程空闲时间达到keepAliveTime时，线程会退出，直到线程数量=corePoolSize
         //允许线程空闲时间60秒，当maxPoolSize的线程在空闲时间到达的时候销毁
@@ -38,7 +38,7 @@ public class ThreadPoolTaskConfig {
 
         //spring 提供的 ThreadPoolTaskExecutor 线程池，是有setThreadNamePrefix() 方法的。
         //jdk 提供的ThreadPoolExecutor 线程池是没有 setThreadNamePrefix() 方法的
-        threadPoolTaskExecutor.setThreadNamePrefix("小滴课堂Spring自带Async前缀：");
+        threadPoolTaskExecutor.setThreadNamePrefix("AccountSms：");
         threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
 
         // rejection-policy：当pool已经达到max size的时候，如何处理新任务

@@ -131,6 +131,4 @@ public class ProductOrderDO implements Serializable {
      *  发票收票人邮箱 
      */
     private String billReceiverEmail;
-
-
 }

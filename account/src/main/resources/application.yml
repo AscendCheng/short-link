@@ -1,25 +1,27 @@
 server:
   port: 8081
+
 spring:
   application:
     name: acount
+  profiles:
+    active: ${PROFILES_ACTIVE:local}
   cloud:
     nacos:
       discovery:
-        username: nacos
-        password: nacos
-        server-addr: 106.14.157.166:8848
-
+        username: ${NACOS_USERNAME:}
+        password: ${NACOS_PWD:}
+        server-addr: ${NACOS_ADDR:}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://106.14.157.166:3306/data?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: ENC(QgMFhSYEGAS7e3pa08jAhhjivCA1iG5d)
+    url: jdbc:mysql://${DB_URL}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:}
+    password: ${DB_PWD:}
 
   redis:
     client-type: jedis
-    host: 140.143.141.194
-    password: redispsw
+    host: ${REDIS_URL:}
+    password: ${REDIS_PWD:}
     port: 6379
     jedis:
       pool:
@@ -38,14 +40,14 @@ spring:
         connectionTimeoutMilliseconds: 30000
         driver-class-name: com.mysql.cj.jdbc.Driver
         idleTimeoutMilliseconds: 60000
-        jdbc-url: jdbc:mysql://106.14.157.166:3306/data?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        jdbc-url: jdbc:mysql://${DB_URL}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
         maintenanceIntervalMilliseconds: 30000
         maxLifetimeMilliseconds: 1800000
         maxPoolSize: 50
         minPoolSize: 50
-        password: ENC(QgMFhSYEGAS7e3pa08jAhhjivCA1iG5d)
+        password: ${DB_PWD}
         type: com.zaxxer.hikari.HikariDataSource
-        username: root
+        username: ${DB_USERNAME}
     props:
       # 打印执行的数据库以及语句
       sql:
@@ -77,15 +79,15 @@ mybatis-plus:
 
 
 sms:
-  app-code: 1ab6e5a9091f4614b0c995e4cb71297e
-  app-secret: fehuNmtCmTVt8tYb1ySGsEDg1KOFMU3h
-  template-id: M72CB42894
+  app-code: ${APP_CODE:}
+  app-secret: ${APP_SECRET:}
+  template-id: ${TEMPLATE_ID:}
 
 
 #阿里云OSS配置
 aliyun:
   oss:
     endpoint: oss-cn-shanghai.aliyuncs.com
-    access-key-id:
-    access-key-secret:
-    bucketname: cyx-short-link
+    access-key-id: ${ACCESS_KEY_ID:}
+    access-key-secret: ${ACCESS_KEY_SECRET}
+    bucketname: ${BUCKET_NAME}

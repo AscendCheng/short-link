@@ -39,9 +39,16 @@ public class RabbitMqConfig {
 
     private String shortLinkDeleteMappingQueue = "short_link.delete.mapping.queue";
 
+    /**
+     * 删除短链，用于生产者发送到队列.
+     */
     private String shortLinkDeleteRoutingKey = "short_link.delete.link.mapping.routing.key";
 
+    /**
+     * 删除短链，用于消费者消费消息.
+     */
     private String shortLinkDeleteLinkBindingKey = "short_link.delete.link.*.routing.key";
+
 
     private String shortLinkDeleteMappingBindingKey = "short_link.delete.*.mapping.routing.key";
 
@@ -63,12 +70,6 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Binding shortLinkAddLinkApiBinding() {
-        return new Binding(shortLinkAddLinkQueue, Binding.DestinationType.QUEUE,
-                shortLinkEventExchange, shortLinkAddLinkBindingKey, null);
-    }
-
-    @Bean
     public Binding shortLinkAddMappingApiBinding() {
         return new Binding(shortLinkAddMappingQueue, Binding.DestinationType.QUEUE,
                 shortLinkEventExchange, shortLinkAddMappingBindingKey, null);
@@ -82,6 +83,12 @@ public class RabbitMqConfig {
     @Bean
     public Queue shortLinkAddMappingQueue() {
         return new Queue(shortLinkAddMappingQueue, true, false, false);
+    }
+
+    @Bean
+    public Binding shortLinkAddLinkApiBinding() {
+        return new Binding(shortLinkAddLinkQueue, Binding.DestinationType.QUEUE,
+                shortLinkEventExchange, shortLinkAddLinkBindingKey, null);
     }
 
     @Bean

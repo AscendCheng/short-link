@@ -30,7 +30,7 @@ public class ProductOrderManagerImpl implements ProductOrderManager {
     }
 
     @Override
-    public ProductOrderDO findByOutTradeNoAndAccountNo(String outTradeNo, String accountNo) {
+    public ProductOrderDO findByOutTradeNoAndAccountNo(String outTradeNo, Long accountNo) {
         ProductOrderDO productOrderDO = productOrderMapper.selectOne(new QueryWrapper<>(new ProductOrderDO())
                 .eq("out_trade_no", outTradeNo)
                 .eq("account_no", accountNo));
@@ -38,7 +38,7 @@ public class ProductOrderManagerImpl implements ProductOrderManager {
     }
 
     @Override
-    public int updateOrderPayState(String outTradeNo, String accountNo, String oldPayState, String newPayState) {
+    public int updateOrderPayState(String outTradeNo, Long accountNo, String oldPayState, String newPayState) {
         productOrderMapper.update(null, new UpdateWrapper<ProductOrderDO>()
                 .eq("out_trade_no", outTradeNo)
                 .eq("account_no", accountNo)
@@ -50,7 +50,7 @@ public class ProductOrderManagerImpl implements ProductOrderManager {
     }
 
     @Override
-    public PageVo page(int pageNum, int pageSize, String accountNo, String payState) {
+    public PageVo page(int pageNum, int pageSize, Long accountNo, String payState) {
         Page<ProductOrderDO> page = new Page<>(pageNum, pageSize);
         IPage<ProductOrderDO> iPage;
         if (StringUtils.isBlank(payState)) {

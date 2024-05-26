@@ -75,6 +75,7 @@ public class LinkGroupServiceImpl extends ServiceImpl<LinkGroupMapper, LinkGroup
         for (LinkGroupDO linkGroupDO : linkGroupDoList) {
             LinkGroupVO linkGroupVO = new LinkGroupVO();
             BeanUtils.copyProperties(linkGroupDO, linkGroupVO);
+            list.add(linkGroupVO);
         }
         return list;
     }

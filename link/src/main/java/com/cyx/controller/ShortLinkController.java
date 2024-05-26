@@ -27,7 +27,7 @@ public class ShortLinkController {
     @Autowired
     private ShortLinkService shortLinkService;
 
-    @PostMapping("/create")
+    @PostMapping("/add")
     public JsonData createShortLink(@RequestBody ShortLinkAddRequest request) {
         return shortLinkService.createShortLink(request);
     }

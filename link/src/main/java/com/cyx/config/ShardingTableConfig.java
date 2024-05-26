@@ -22,7 +22,7 @@ public class ShardingTableConfig {
     //配置启用那些表的后缀
     static {
         tableSuffixList.add("0");
-        tableSuffixList.add("1");
+        tableSuffixList.add("a");
     }
 
 
