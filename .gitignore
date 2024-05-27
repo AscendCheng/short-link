@@ -2,3 +2,4 @@
 */target/
 *.iml
 application-*.yml
+*/*/*/resources/application-local.properties
