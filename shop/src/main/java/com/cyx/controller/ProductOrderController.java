@@ -43,7 +43,7 @@ public class ProductOrderController {
     private StringRedisTemplate redisTemplate;
 
     @GetMapping("/page")
-    @RepeatSubmit(limitType = RepeatSubmit.Type.TOKEN)
+    @RepeatSubmit(limitType = RepeatSubmit.Type.PARAM)
     public JsonData page(@RequestParam(value = "page", defaultValue = "1") int page,
                          @RequestParam(value = "size", defaultValue = "10") int size,
                          @RequestParam(value = "state", required = false) String state) {
