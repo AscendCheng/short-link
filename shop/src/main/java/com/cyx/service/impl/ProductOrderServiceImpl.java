@@ -68,6 +68,7 @@ public class ProductOrderServiceImpl extends ServiceImpl<ProductOrderMapper, Pro
 
         ProductOrderDO productOrderDO = this.saveProductOrder(request, user, orderTradeNo, productDO);
 
+        // 创建支付对象
         PayInfoVo payInfoVo = PayInfoVo.builder()
                 .outTradeNo(orderTradeNo)
                 .clientType(request.getClientType())
@@ -77,6 +78,8 @@ public class ProductOrderServiceImpl extends ServiceImpl<ProductOrderMapper, Pro
                 .payFee(request.getPayAmount())
                 .orderPayTimeOutMills(TimeConstant.ORDER_PAY_TIMEOUT_MILL)
                 .build();
+
+        // 发送延迟消息
 
 
         return null;
